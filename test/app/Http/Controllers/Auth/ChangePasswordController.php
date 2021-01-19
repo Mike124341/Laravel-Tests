@@ -22,4 +22,18 @@ class ChangePasswordController extends Controller
         #return de view met de user gegevens
         return view("user.changepassword", compact('user'));
     }
+
+    public function update(Request $request, $id)    {
+        $this->validate($request, [
+            "old_password" => "required",
+            "password" => "required",
+            "old_password" => "required|same:password"
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return redirect()->route("home")->with("Succes", "Password changed");
+    }
 }
