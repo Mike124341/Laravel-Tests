@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
   Route::resource('contacts', 'App\Http\Controllers\ContactController');
+  Route::resource('forgotpass', 'App\Http\Controllers\ContactController');
   Route::resource('user', 'App\Http\Controllers\UserDashboardController@index');
   Route::resource('companies', 'App\Http\Controllers\CompanyController');
   Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');

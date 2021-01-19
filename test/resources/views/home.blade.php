@@ -19,6 +19,7 @@
                         <li>Gebruikers ID: {{$user->id}}</li>
                         <li>Gebruikers Naam: {{$user->name}}</li>
                         <li>Gebruikers E-mail: {{$user->email}}</li>
+                        <li><a href="{{ route('forgotpass')}}">Verander wachtwoord</a></li>
                     </ul>
                 </div>
             </div>
