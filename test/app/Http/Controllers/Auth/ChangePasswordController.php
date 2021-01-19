@@ -20,7 +20,7 @@ class ChangePasswordController extends Controller
         #Zet de gegevens van de user in de var user
         $user = Auth::user(); 
         #return de view met de user gegevens
-        return view("user.changepassword", compact('user'));
+        return view("user.changePassword", compact('user'));
     }
 
     public function update(Request $request, $id)    {
