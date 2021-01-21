@@ -13,7 +13,8 @@
     </div>
 @endif
 
-{!! Form::model($user, ['method' => 'POST', 'route' => ['updatepassword', $user->id]]) !!}
+{!! Form::model($user, ['method' => 'GET', 'route' => ['updatepassword.update', $user->id]]) !!}
+{{ method_field('PATCH') }}
 <div class="row">
     <div class="col-lg-3">{!! Form::label('old_password', 'Oud wachtwoord: ') !!}</div>
     <div class="col-lg-3">{!! Form::password('old_password', ['class'=>'form-control']) !!}</div>

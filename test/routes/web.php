@@ -19,9 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
+  Route::resource('updatepassword', 'App\Http\Controllers\Change_PasswordController');#password veranderen
+  #route voor de pop up form
+  Route::post('cssupdate', 'App\Http\Controllers\Pop_upController@updateColor');
+
   Route::resource('contacts', 'App\Http\Controllers\ContactController');
-  Route::resource('forgotpass', 'App\Http\Controllers\ContactController');
-  Route::resource('user', 'App\Http\Controllers\UserDashboardController@index');
   Route::resource('companies', 'App\Http\Controllers\CompanyController');
   Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 });
