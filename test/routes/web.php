@@ -19,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
-  Route::resource('updatepassword', 'App\Http\Controllers\Change_PasswordController');#password veranderen
+  Route::post('passupdate', 'App\Http\Controllers\Pop_upController@changePassword');#password veranderen
   #route voor de pop up form
   Route::post('cssupdate', 'App\Http\Controllers\Pop_upController@updateColor');
 
