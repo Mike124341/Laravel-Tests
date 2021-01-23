@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::post('passupdate', 'App\Http\Controllers\Pop_upController@changePassword');#password veranderen
   #route voor de pop up form
   Route::post('cssupdate', 'App\Http\Controllers\Pop_upController@updateColor');
+  Route::post('join-band-request', 'App\Http\Controllers\Pop_upController@sent_band_request');
 
   Route::resource('contacts', 'App\Http\Controllers\ContactController');
   Route::resource('companies', 'App\Http\Controllers\CompanyController');

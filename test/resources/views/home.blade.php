@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- voor test {{$user}} -->
+<!-- {{$user->name}} -->
 
 <!--- Pop Up HTML voor het veranderen van jouw persoonlijke kleuren -->
 <div class="modal fade bd-example-modal-lg" id="colorchange_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -10,12 +10,12 @@
       <form action="/cssupdate" method="post">
         @csrf
         <label for="achtergrond">Kies een achtergronds kleur:</label>
-        <input type="color" value="#ff0000" name="achtergrondkleur" id="achtergrond">
+        <input type="color" value="{{$user->achtergrondKleur}}" name="achtergrondkleur" id="achtergrond">
 
         <label for="tekst">Kies een tekst kleur:</label>
-        <input type="color" value="#ff0000" name="tekstkleur" id="tekst">
+        <input type="color" value="{{$user->tesktKleur}}" name="tekstkleur" id="tekst">
 
-        <button type="submit" class="btn btn-warning">verander</button>
+        <button type="submit" class="btn btn-sm btn-warning">verander</button>
       </form>
     </div>
   </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-warning">verander</button>
+            <button type="submit" class="btn btn-sm btn-warning">verander</button>
           </div>
         </div>
       </form>
@@ -57,15 +57,46 @@
   </div>
 </div>
 
+<!--- Pop Up HTML voor het Aanmelden bij een band -->
+<div class="modal fade bd-example-modal-lg" id="sentBandRequest_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="/join-band-request" method="post">
+        @csrf
+        <label for="band_request_join">Voer band naam in:</label>
+        <input type="text" placeholder="Band Naam" name="band_request_join">
+
+        <button type="submit" class="btn btn-sm btn-warning">Aanmelden</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- Begin gebruikers data section -->
-<div class="container">
+<div class="container" >
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h3>{{ __('Dashboard') }}</h3></div>
+                <div class="card-header" ><h3>{{ __('Dashboard') }}</h3></div>
 
-                <div class="card-body">
+                <div class="card-body" style="background-color:{{$user->achtergrondKleur}}">
+                <!-- alert als iemand jouw band wil joinen -->
+                @if($band_requests != '[]')
+                    <div class="alert alert-info" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                        <h4>Let op!</h4>
+                        <p style="color:{{$user->tesktKleur}}">
+                        Hallo {{$user->name}} er is iemand geïnteresseerd in uw band! <br>
+                        Deze gebruiker heeft gevraagd of hij/zij mee mag doen met uw band, <br>
+                        Om deze gebruiker to te accepteren druk op de link <a href=""> accepteren.</a>
+                        </p>
+                        
+                    </div>
+                @endif
+                <!-- einde alert joinen -->
+
                 <!-- Error displaty -->
                     @if ($errors->any())
                       <div class="alert alert-danger" role="alert">
@@ -91,7 +122,7 @@
                 <!-- Einde message -->
                 <!-- Begin user gegevens en buttons-->
                     <h5>Gebruiker gegevens</h5>
-                    <ul>
+                    <ul style="color:{{$user->tesktKleur}}">
                         <li>Gebruikers ID: {{$user->id}}</li>
                         <li>Gebruikers Naam: {{$user->name}}</li>
                         <li>Gebruikers E-mail: {{$user->email}}</li>
@@ -102,6 +133,9 @@
                         </button></li>
                         <li><button type="button" id="pop-up-2" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#passchange_modal">
                           Verander wachtwoord
+                        </button></li>
+                        <li><button class="btn-outline-warning btn-sm btn" data-toggle="modal" data-target="#sentBandRequest_modal">
+                          Meedoen aan bij Band
                         </button></li>
                     </ul>
                 <!-- Einde User Gegevens En Buttons -->
