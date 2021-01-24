@@ -86,6 +86,6 @@ class Pop_upController extends Controller
 
         BandRequests::insert($insert_data_join_request);
 
-        return back()->withErrors(['Succes', 'check DB' ]);
+        return redirect()->back()->with('success', 'Uw verzoek is verstuurd');
     }
 }

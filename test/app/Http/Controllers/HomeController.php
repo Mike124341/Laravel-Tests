@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\BandRequestController;
+use App\Models\BandRequests;
 
 class HomeController extends Controller
 {
@@ -27,7 +27,8 @@ class HomeController extends Controller
     {
         #Haal Data van de user op en zet in var user
         $user = Auth::user();
-        return app('App\Http\Controllers\BandRequestController')->checkUser_Request();
-        // return view('home', compact('user'));
+        $band_requests = BandRequests::where('band_admin_name', $user->name)->where('band_admin_id', $user->id)->get();
+
+        return view('home', compact('user', 'band_requests'));
     }
 }

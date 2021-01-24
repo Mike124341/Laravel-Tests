@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function() {
   #route voor de pop up form
   Route::post('cssupdate', 'App\Http\Controllers\Pop_upController@updateColor');
   Route::post('join-band-request', 'App\Http\Controllers\Pop_upController@sent_band_request');
+  Route::get('/band-join-accept', 'App\Http\Controllers\BandRequestController@acceptRequest');
+  Route::get('/band-join-decline', 'App\Http\Controllers\BandRequestController@declineRequest');
 
   Route::resource('contacts', 'App\Http\Controllers\ContactController');
   Route::resource('companies', 'App\Http\Controllers\CompanyController');

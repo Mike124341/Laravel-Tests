@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- {{$user->name}} -->
-
 <!--- Pop Up HTML voor het veranderen van jouw persoonlijke kleuren -->
 <div class="modal fade bd-example-modal-lg" id="colorchange_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -81,7 +80,7 @@
 
                 <div class="card-body" style="background-color:{{$user->achtergrondKleur}}">
                 <!-- alert als iemand jouw band wil joinen -->
-                @if($band_requests != '[]')
+                @if($band_requests != '[]') <!-- Dit is de standaard value van de var dus als de querry niks terug brengt-->
                     <div class="alert alert-info" role="alert">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">×</span>
@@ -90,7 +89,8 @@
                         <p style="color:{{$user->tesktKleur}}">
                         Hallo {{$user->name}} er is iemand geïnteresseerd in uw band! <br>
                         Deze gebruiker heeft gevraagd of hij/zij mee mag doen met uw band, <br>
-                        Om deze gebruiker to te accepteren druk op de link <a href=""> accepteren.</a>
+                        Om deze gebruiker to te accepteren druk op de link <a href="/band-join-accept"> accepteren.</a> <br>
+                        Of druk op de Volgende link om het verzoek aftewijzen <a href="/band-join-decline">Link</a>
                         </p>
                         
                     </div>
